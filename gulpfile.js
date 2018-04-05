@@ -1,6 +1,6 @@
 var syntax        = 'sass'; // Syntax: sass or scss;
 
-var gulp          = require('gulp'),
+var gulp              = require('gulp'),
 		gutil         = require('gulp-util' ),
 		sass          = require('gulp-sass'),
 		browsersync   = require('browser-sync'),
@@ -10,7 +10,9 @@ var gulp          = require('gulp'),
 		rename        = require('gulp-rename'),
 		autoprefixer  = require('gulp-autoprefixer'),
 		notify        = require("gulp-notify"),
-		rsync         = require('gulp-rsync');
+		rsync         = require('gulp-rsync')
+		imagemin     = require('gulp-imagemin')
+		pngquant     = require('imagemin-pngquant');
 
 gulp.task('browser-sync', function() {
 	browsersync({
@@ -22,6 +24,22 @@ gulp.task('browser-sync', function() {
 		// tunnel: true,
 		// tunnel: "projectname", //Demonstration page: http://projectname.localtunnel.me
 	})
+});
+
+gulp.task('clear', function() {  //Очистка кэша картинок в ручном режиме
+    cache.clearAll();
+});
+
+gulp.task('img', function() {
+    return(gulp.src('app/img/**/*'))
+    .pipe(cache(imagemin({
+        interlaced: true,
+        progressive: true,
+        optimizationLevel: 5,
+        svgoPlugins: [{removeViewBox: true}],
+        une: [pngquant()]
+    })))
+    .pipe(gulp.dest('dist/img'));
 });
 
 gulp.task('styles', function() {
