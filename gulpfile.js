@@ -11,8 +11,10 @@ var gulp              = require('gulp'),
 		autoprefixer  = require('gulp-autoprefixer'),
 		notify        = require("gulp-notify"),
 		rsync         = require('gulp-rsync')
-		imagemin     = require('gulp-imagemin')
-		pngquant     = require('imagemin-pngquant');
+		imagemin      = require('gulp-imagemin')
+		pngquant      = require('imagemin-pngquant')
+		del           = require('del')
+		cache         = require('gulp-cache');
 
 gulp.task('browser-sync', function() {
 	browsersync({
@@ -91,16 +93,12 @@ gulp.task('clean', function() {
 });
 
 gulp.task('build', ['clean', 'img', 'styles', 'js'], function() {
-    var buildCss = gulp.src([
-        'app/css/main.css',
-        'app/css/libs.min.css',
-
-    ])
+	
+    var buildCss = gulp.src(['app/css/**/*.css'])
     .pipe(gulp.dest('dist/css'));
 
     var buildFonts = gulp.src('app/fonts/**/*')
-
-    .pipe(gulp.dest('dist/fonts'));
+	.pipe(gulp.dest('dist/fonts'));
 
     var buildJs = gulp.src('app/js/**/*')
     .pipe(gulp.dest('dist/js'));
