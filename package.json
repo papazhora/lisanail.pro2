@@ -1,12 +1,12 @@
 {
-  "name": "optimizedhtml",
-  "version": "4.1.0",
-  "description": "OptimizedHTML 4 - Start HTML Template",
+  "name": "lisanailpro",
+  "version": "1.0.0",
+  "description": "LisaNail.pro - Portfolio",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "WebDesign Master",
+  "author": "Egor Malinin",
   "license": "ISC",
   "devDependencies": {
     "browser-sync": "^2.23.6",
